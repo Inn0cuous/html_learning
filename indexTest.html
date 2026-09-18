@@ -13,20 +13,50 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+h4 {
+  text-align: left;
+  /*font-style: italic;*/
+  color: whitesmoke;
+  margin-bottom: 0px;
+}
+
+.footertext {
+  text-align: left;
+  font-style: italic;
+  color: rgb(209, 201, 201);
+  margin-top: 1em;
+}
+
+.mycontainer {display: flex; flex-wrap: wrap;}
+.mycontainer > div {width: 33%;}
+
+h6 {
+  text-align: left;
+  margin-top: 0.1em;
+  margin-bottom: 0.5em;
+  font-size: 1.2em;     
+}
+
 /* Style the header */
 header {
   background-color: #666;
-  padding: 30px;
+  padding:0.5px;
   text-align: center;
   font-size: 35px;
   color: white;
 }
 
-/* Create two columns/boxes that floats next to each other */
+/* Container for flexboxes */
+section {
+  display: -webkit-flex;
+  display: flex;
+}
+
+/* Style the navigation menu */
 nav {
-  float: left;
-  width: 30%;
-  height: 300px; /* only for demonstration, should be removed */
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
   background: #ccc;
   padding: 20px;
 }
@@ -37,19 +67,13 @@ nav ul {
   padding: 0;
 }
 
+/* Style the content */
 article {
-  float: left;
-  padding: 20px;
-  width: 70%;
+  -webkit-flex: 3;
+  -ms-flex: 3;
+  flex: 3;
   background-color: #f1f1f1;
-  height: 300px; /* only for demonstration, should be removed */
-}
-
-/* Clear floats after the columns */
-section::after {
-  content: "";
-  display: table;
-  clear: both;
+  padding: 10px;
 }
 
 /* Style the footer */
@@ -60,43 +84,90 @@ footer {
   color: white;
 }
 
-/* Responsive layout - makes the two columns/boxes stack on top of each other instead of next to each other, on small screens */
+/* Responsive layout - makes the menu and the content (inside the section) sit on top of each other instead of next to each other */
 @media (max-width: 600px) {
-  nav, article {
-    width: 100%;
-    height: auto;
+  section {
+    -webkit-flex-direction: column;
+    flex-direction: column;
   }
 }
 </style>
 </head>
 <body>
 
-<h2>CSS Layout Float</h2>
-<p>In this example, we have created a header, two columns/boxes and a footer. On smaller screens, the columns will stack on top of each other.</p>
-<p>Resize the browser window to see the responsive effect (you will learn more about this in our next chapter - HTML Responsive.)</p>
-
-<header>
-  <h2>Cities</h2>
+ <header>
+  <h2>Nathan Broster-Masureik</h2>
 </header>
 
 <section>
   <nav>
     <ul>
-      <li><a href="#">London</a></li>
-      <li><a href="#">Paris</a></li>
-      <li><a href="#">Tokyo</a></li>
+        <li><a href="#">Personal Statement</a></li>
+        <li><a href="#">Education</a></li>
+        <li><a href="#">Key Skills</a></li>
+        <li><a href="#">Extracurricular Activities</a></li>
+        <li><a href="#">Contact Information</a></li>
     </ul>
   </nav>
   
   <article>
-    <h1>London</h1>
-    <p>London is the capital city of England. It is the most populous city in the  United Kingdom, with a metropolitan area of over 13 million inhabitants.</p>
-    <p>Standing on the River Thames, London has been a major settlement for two millennia, its history going back to its founding by the Romans, who named it Londinium.</p>
+    <h1>Personal Statement</h1>
+    <p>Grade 11 student at Pinelands High School with strong analytical, problem-solving, and time-management skills. Active in many extracurricular activities, with experience collaborating in competitive and performance-based environments.</p>
+    
+    <h1>Education</h1>
+    <p>Pinelands High School <br> <i> Grade 11 Student (current)</i></p>
+    <h6>Subjects</h6>
+    <ul>
+        <li>English Home Language</li>
+        <li>Afrikaans First Additional Language</li>
+        <li>Life Orientation</li>
+        <li>Pure/Core Mathematics</li>
+        <li>Further Studies Mathematics (Standard and Extended)</li>
+        <li>Physical Sciences</li>
+        <li>Engineering Graphics and Design</li>
+        <li>Consumer Studies</li>
+        <li>Information Technology</li>
+    </ul>
+
+    <h1>Key Skills</h1>
+    <ul>
+        <li>Analytical & Technical: Programming logic (Delphi/pascal), techincal drawing (EGD), advanced mathematical problem-solving.</li>
+        <li>Teamwork & Collaboration: Developed through competitve team sports and musical performances.</li>
+        <li>Discipline & Time management: Balancing a rigorous academic load with multiple extracurricular commitments.</li>
+        <li>Creativity & Performance: Expressed through musical collaboration and school spirit events.</li>
+    </ul>
+
+    <h1>Extracurricular Activities</h1>
+    <div class="mycontainer">
+    <div>
+    <h6> Music & School Culture </h6>
+    <ul>
+        <li> Jazz Band member: Have been playing with the band for the last 3 years as an alto saxophonist and baritone saxophinist (current). The band has participated in various competitions, most recently coming 2nd at V&A Waterfront High School Band Slam competition. </li>
+        <li> Spirit Squad Band: Motivate my fellow peers and represent our school's pride during sport events. </li>
+        <li> Legally Blonde band: Performed as a member of the live band for the bi-yearly school musical, collaborating with fellow musicians and performers throughout rehearsals. </li>
+    </ul>
+    </div>
+    <div>
+    <h6> Academic Extension </h6>
+    <ul>
+        <li> Cape Town Eskom Expo for Young Scientists competition: Participated in the regional round of the Expo competition with my partner Ewan Connan and was awarded a bronze medal in the Computer Sciences section. </li>
+        <li> UCT Maths Competition: Participate annually in the University of Cape Town Maths Competition and just fall shy of the requirements to make it to the 2nd round each time. </li>
+        <li> IT coding Olympiad: Achieved 100% in the first round of the South African Computer Olympiad that took place on the 31st of July and achieved 49% in the 2nd round. </li>
+    </ul>
+    </div>
+    <div>
+    <h6> Sports </h6>
+    <ul>
+        <li> Water Polo, Volleyball and Rugby player: Active participant in multiple team sports, fostering physical fitness, resillience and excellent team dynamics. </li>
+    </ul>
+    </div>
+    </div>
   </article>
 </section>
 
 <footer>
-  <p>Footer</p>
+    <h4> Nathan Broster-Masureik Contact Information</h4>
+    <p class="footertext">Address: 7 Field Close, Pinelands, 7405 <br> Cellphone: (+27) 68 495 6333 | School phone: 021 531 7410 <br> Email: nathan.broster-masureik@phs.org.za <br> Languages: English (Home Language), Afrikans (First Additional Language)</p>
 </footer>
 
 </body>
