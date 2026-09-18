@@ -1,175 +1,525 @@
+
+
+Portfolio · HTML
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Nathan Broster-Masureik Portfolio</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nathan Broster-Masureik — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-* {
-  box-sizing: border-box;
-}
-
-body {
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-h4 {
-  text-align: left;
-  /*font-style: italic;*/
-  color: whitesmoke;
-  margin-bottom: 0px;
-}
-
-.footertext {
-  text-align: left;
-  font-style: italic;
-  color: rgb(209, 201, 201);
-  margin-top: 1em;
-}
-
-.mycontainer {display: flex; flex-wrap: wrap;}
-.mycontainer > div {width: 33%;}
-
-h6 {
-  text-align: left;
-  margin-top: 0.1em;
-  margin-bottom: 0.5em;
-  font-size: 1.2em;     
-}
-
-/* Style the header */
-header {
-  background-color: #666;
-  padding:0.5px;
-  text-align: center;
-  font-size: 35px;
-  color: white;
-}
-
-/* Container for flexboxes */
-section {
-  display: -webkit-flex;
-  display: flex;
-}
-
-/* Style the navigation menu */
-nav {
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
-  background: #ccc;
-  padding: 20px;
-}
-
-/* Style the list inside the menu */
-nav ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-/* Style the content */
-article {
-  -webkit-flex: 3;
-  -ms-flex: 3;
-  flex: 3;
-  background-color: #f1f1f1;
-  padding: 10px;
-}
-
-/* Style the footer */
-footer {
-  background-color: #777;
-  padding: 10px;
-  text-align: center;
-  color: white;
-}
-
-/* Responsive layout - makes the menu and the content (inside the section) sit on top of each other instead of next to each other */
-@media (max-width: 600px) {
-  section {
-    -webkit-flex-direction: column;
-    flex-direction: column;
+ 
+  /* ---------- tokens ---------- */
+  :root{
+    --paper:        #f1ede2;
+    --paper-line:   #d9d2bf;
+    --ink:          #1f2b38;
+    --ink-soft:     #4c5a68;
+    --blue:         #2c5a86;
+    --blue-soft:    #cfe0ec;
+    --rust:         #b25a2e;
+    --sage:         #5c7a55;
+    --amber:        #b6862f;
+    --card-bg:      #f8f6ef;
+    --line:         #b9b0a0;
+    --shadow-none:  none;
   }
-}
+ 
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:      #14181d;
+      --paper-line: #232a32;
+      --ink:        #eae6db;
+      --ink-soft:   #a9b2ba;
+      --blue:       #7fb0d6;
+      --blue-soft:  #223547;
+      --rust:       #d98858;
+      --sage:       #8fae83;
+      --amber:      #d9ae5f;
+      --card-bg:    #191f26;
+      --line:       #333c45;
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:      #14181d;
+    --paper-line: #232a32;
+    --ink:        #eae6db;
+    --ink-soft:   #a9b2ba;
+    --blue:       #7fb0d6;
+    --blue-soft:  #223547;
+    --rust:       #d98858;
+    --sage:       #8fae83;
+    --amber:      #d9ae5f;
+    --card-bg:    #191f26;
+    --line:       #333c45;
+  }
+ 
+  *{ box-sizing: border-box; }
+ 
+  body{
+    margin: 0;
+    background:
+      repeating-linear-gradient(0deg, var(--paper-line) 0 1px, transparent 1px 32px),
+      repeating-linear-gradient(90deg, var(--paper-line) 0 1px, transparent 1px 32px),
+      var(--paper);
+    background-attachment: fixed;
+    color: var(--ink);
+    font-family: 'IBM Plex Sans', Arial, sans-serif;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+ 
+  a{ color: var(--blue); }
+  a:focus-visible, button:focus-visible{ outline: 2px solid var(--blue); outline-offset: 2px; }
+ 
+  .mono{
+    font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace;
+  }
+ 
+  .wrap{
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 28px 24px 0;
+  }
+ 
+  /* ---------- title strip (drawing header) ---------- */
+  .titlestrip{
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    border: 1.5px solid var(--ink);
+    background: var(--card-bg);
+    padding: 16px 20px;
+  }
+ 
+  .mark{
+    width: 52px;
+    height: 52px;
+    flex: none;
+    border: 1.5px solid var(--ink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: 0.02em;
+  }
+ 
+  .titlestrip h1{
+    margin: 0;
+    font-size: clamp(1.35rem, 2.4vw, 1.9rem);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+ 
+  .titlestrip .role{
+    margin: 2px 0 0;
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+  }
+ 
+  .titlestrip .meta{
+    margin-left: auto;
+    text-align: right;
+    font-size: 0.72rem;
+    color: var(--ink-soft);
+    letter-spacing: 0.06em;
+    line-height: 1.7;
+  }
+ 
+  /* ---------- layout ---------- */
+  .layout{
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 0;
+    border: 1.5px solid var(--ink);
+    border-top: none;
+  }
+ 
+  nav{
+    border-right: 1.5px solid var(--ink);
+    padding: 22px 0;
+    background: var(--card-bg);
+  }
+ 
+  nav .navlabel{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    color: var(--ink-soft);
+    padding: 0 20px 10px;
+  }
+ 
+  nav ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+ 
+  nav li a{
+    display: flex;
+    gap: 10px;
+    align-items: baseline;
+    padding: 11px 20px;
+    text-decoration: none;
+    color: var(--ink);
+    font-size: 0.94rem;
+    border-left: 3px solid transparent;
+    transition: border-color 0.15s ease, background 0.15s ease;
+  }
+ 
+  nav li a .idx{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--ink-soft);
+  }
+ 
+  nav li a:hover,
+  nav li a:focus-visible{
+    border-left-color: var(--rust);
+    background: var(--paper);
+  }
+ 
+  main{
+    padding: 8px 32px 40px;
+  }
+ 
+  section{
+    position: relative;
+    padding: 34px 4px 18px;
+    border-bottom: 1px dashed var(--line);
+  }
+  section:last-of-type{ border-bottom: none; }
+ 
+  .sheet-idx{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--rust);
+    letter-spacing: 0.06em;
+    margin: 0 0 6px;
+  }
+ 
+  h2{
+    margin: 0 0 14px;
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+ 
+  section p{
+    max-width: 68ch;
+    color: var(--ink);
+  }
+ 
+  .subjects{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 8px 18px;
+    max-width: 68ch;
+    margin: 14px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .subjects li{
+    font-size: 0.92rem;
+    padding-left: 14px;
+    border-left: 2px solid var(--blue-soft);
+  }
+ 
+  .school{
+    font-weight: 500;
+  }
+  .school + .years{
+    color: var(--ink-soft);
+    font-style: italic;
+    font-size: 0.92rem;
+  }
+ 
+  .skills{
+    margin: 14px 0 0;
+    padding: 0;
+    list-style: none;
+    max-width: 70ch;
+    display: grid;
+    gap: 12px;
+  }
+  .skills li{
+    padding-left: 16px;
+    border-left: 2px solid var(--sage);
+  }
+  .skills strong{
+    display: block;
+    font-size: 0.95rem;
+    margin-bottom: 2px;
+  }
+ 
+  /* ---------- extracurricular cards ---------- */
+  .cards{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin-top: 18px;
+  }
+ 
+  .card{
+    border: 1px solid var(--line);
+    background: var(--card-bg);
+    padding: 18px 18px 20px;
+    position: relative;
+  }
+  .card::before{
+    content: "";
+    position: absolute;
+    top: -1px; left: -1px;
+    width: 10px; height: 10px;
+    border-top: 2px solid var(--tag, var(--rust));
+    border-left: 2px solid var(--tag, var(--rust));
+  }
+  .card::after{
+    content: "";
+    position: absolute;
+    bottom: -1px; right: -1px;
+    width: 10px; height: 10px;
+    border-bottom: 2px solid var(--tag, var(--rust));
+    border-right: 2px solid var(--tag, var(--rust));
+  }
+ 
+  .card.music{ --tag: var(--amber); }
+  .card.academic{ --tag: var(--blue); }
+  .card.sport{ --tag: var(--sage); }
+ 
+  .tag{
+    display: inline-block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    color: var(--tag);
+    border: 1px solid var(--tag);
+    padding: 2px 8px;
+    margin-bottom: 10px;
+  }
+ 
+  .card h3{
+    margin: 0 0 10px;
+    font-size: 1.05rem;
+    font-weight: 600;
+  }
+ 
+  .card ul{
+    margin: 0;
+    padding-left: 18px;
+    font-size: 0.9rem;
+  }
+  .card ul li{ margin-bottom: 10px; }
+  .card ul li:last-child{ margin-bottom: 0; }
+ 
+  /* ---------- title block footer ---------- */
+  footer{
+    border: 1.5px solid var(--ink);
+    border-top: none;
+    background: var(--card-bg);
+  }
+ 
+  .titleblock{
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  }
+ 
+  .tb-cell{
+    border-top: 1px solid var(--ink);
+    border-left: 1px solid var(--ink);
+    padding: 12px 16px;
+  }
+  .titleblock .tb-cell:first-child{ border-left: none; }
+ 
+  .tb-label{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.64rem;
+    letter-spacing: 0.08em;
+    color: var(--ink-soft);
+    margin: 0 0 4px;
+  }
+  .tb-value{
+    margin: 0;
+    font-size: 0.92rem;
+  }
+  .tb-value a{ color: var(--ink); text-decoration: underline; text-decoration-color: var(--line); }
+ 
+  .colophon{
+    text-align: center;
+    padding: 10px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--ink-soft);
+    border-top: 1px solid var(--ink);
+  }
+ 
+  /* ---------- responsive ---------- */
+  @media (max-width: 820px){
+    .layout{ grid-template-columns: 1fr; }
+    nav{ border-right: none; border-bottom: 1.5px solid var(--ink); padding: 14px 0; }
+    nav ul{ display: flex; flex-wrap: wrap; }
+    nav li a{ padding: 8px 14px; border-left: none; border-bottom: 3px solid transparent; }
+    nav li a:hover, nav li a:focus-visible{ border-left-color: transparent; border-bottom-color: var(--rust); }
+    main{ padding: 8px 18px 30px; }
+    .cards{ grid-template-columns: 1fr; }
+    .titleblock{ grid-template-columns: 1fr 1fr; }
+    .titlestrip{ flex-wrap: wrap; }
+    .titlestrip .meta{ margin-left: 0; text-align: left; }
+  }
+ 
+  @media (prefers-reduced-motion: reduce){
+    *{ scroll-behavior: auto !important; transition: none !important; }
+  }
+ 
+  html{ scroll-behavior: smooth; }
 </style>
 </head>
 <body>
-
- <header>
-  <h2>Nathan Broster-Masureik</h2>
-</header>
-
-<section>
-  <nav>
-    <ul>
-        <li><a href="#">Personal Statement</a></li>
-        <li><a href="#">Education</a></li>
-        <li><a href="#">Key Skills</a></li>
-        <li><a href="#">Extracurricular Activities</a></li>
-        <li><a href="#">Contact Information</a></li>
-    </ul>
-  </nav>
-  
-  <article>
-    <h1>Personal Statement</h1>
-    <p>Grade 11 student at Pinelands High School with strong analytical, problem-solving, and time-management skills. Active in many extracurricular activities, with experience collaborating in competitive and performance-based environments.</p>
-    
-    <h1>Education</h1>
-    <p>Pinelands High School <br> <i> Grade 11 Student (current)</i></p>
-    <h6>Subjects</h6>
-    <ul>
-        <li>English Home Language</li>
-        <li>Afrikaans First Additional Language</li>
-        <li>Life Orientation</li>
-        <li>Pure/Core Mathematics</li>
-        <li>Further Studies Mathematics (Standard and Extended)</li>
-        <li>Physical Sciences</li>
-        <li>Engineering Graphics and Design</li>
-        <li>Consumer Studies</li>
-        <li>Information Technology</li>
-    </ul>
-
-    <h1>Key Skills</h1>
-    <ul>
-        <li>Analytical & Technical: Programming logic (Delphi/pascal), techincal drawing (EGD), advanced mathematical problem-solving.</li>
-        <li>Teamwork & Collaboration: Developed through competitve team sports and musical performances.</li>
-        <li>Discipline & Time management: Balancing a rigorous academic load with multiple extracurricular commitments.</li>
-        <li>Creativity & Performance: Expressed through musical collaboration and school spirit events.</li>
-    </ul>
-
-    <h1>Extracurricular Activities</h1>
-    <div class="mycontainer">
+ 
+<div class="wrap">
+ 
+  <div class="titlestrip">
+    <div class="mark" aria-hidden="true">NBM</div>
     <div>
-    <h6> Music & School Culture </h6>
-    <ul>
-        <li> Jazz Band member: Have been playing with the band for the last 3 years as an alto saxophonist and baritone saxophinist (current). The band has participated in various competitions, most recently coming 2nd at V&A Waterfront High School Band Slam competition. </li>
-        <li> Spirit Squad Band: Motivate my fellow peers and represent our school's pride during sport events. </li>
-        <li> Legally Blonde band: Performed as a member of the live band for the bi-yearly school musical, collaborating with fellow musicians and performers throughout rehearsals. </li>
-    </ul>
+      <h1>Nathan Broster-Masureik</h1>
+      <p class="role">Grade&nbsp;11 Student — Pinelands High School</p>
     </div>
-    <div>
-    <h6> Academic Extension </h6>
-    <ul>
-        <li> Cape Town Eskom Expo for Young Scientists competition: Participated in the regional round of the Expo competition with my partner Ewan Connan and was awarded a bronze medal in the Computer Sciences section. </li>
-        <li> UCT Maths Competition: Participate annually in the University of Cape Town Maths Competition and just fall shy of the requirements to make it to the 2nd round each time. </li>
-        <li> IT coding Olympiad: Achieved 100% in the first round of the South African Computer Olympiad that took place on the 31st of July and achieved 49% in the 2nd round. </li>
-    </ul>
+    <div class="meta mono">
+      PORTFOLIO<br>   
+      UPDATED&nbsp;2026
     </div>
-    <div>
-    <h6> Sports </h6>
-    <ul>
-        <li> Water Polo, Volleyball and Rugby player: Active participant in multiple team sports, fostering physical fitness, resillience and excellent team dynamics. </li>
-    </ul>
+  </div>
+ 
+  <div class="layout">
+    <nav aria-label="Section navigation">
+      <p class="navlabel">CONTENTS</p>
+      <ul>
+        <li><a href="#statement"><span class="idx mono">01</span> Personal Statement</a></li>
+        <li><a href="#education"><span class="idx mono">02</span> Education</a></li>
+        <li><a href="#skills"><span class="idx mono">03</span> Key Skills</a></li>
+        <li><a href="#extracurricular"><span class="idx mono">04</span> Extracurricular</a></li>
+        <li><a href="#contact"><span class="idx mono">05</span> Contact</a></li>
+      </ul>
+    </nav>
+ 
+    <main>
+      <section id="statement">
+        <p class="sheet-idx">SEC. 01 — STATEMENT</p>
+        <h2>Personal Statement</h2>
+        <p>Grade 11 student at Pinelands High School with strong analytical, problem-solving, and time-management skills. Active in many extracurricular activities, with experience collaborating in competitive and performance-based environments.</p>
+      </section>
+ 
+      <section id="education">
+        <p class="sheet-idx">SEC. 02 — EDUCATION</p>
+        <h2>Education</h2>
+        <p class="school">Pinelands High School</p>
+        <p class="years">Grade 11 Student (current)</p>
+ 
+        <ul class="subjects">
+          <li>English Home Language</li>
+          <li>Afrikaans First Additional Language</li>
+          <li>Life Orientation</li>
+          <li>Pure/Core Mathematics</li>
+          <li>Further Studies Mathematics (Standard &amp; Extended)</li>
+          <li>Physical Sciences</li>
+          <li>Engineering Graphics and Design</li>
+          <li>Consumer Studies</li>
+          <li>Information Technology</li>
+        </ul>
+      </section>
+ 
+      <section id="skills">
+        <p class="sheet-idx">SEC. 03 — SKILLS</p>
+        <h2>Key Skills</h2>
+        <ul class="skills">
+          <li><strong>Analytical &amp; Technical</strong>Programming logic (Delphi/Pascal), technical drawing (EGD), advanced mathematical problem-solving.</li>
+          <li><strong>Teamwork &amp; Collaboration</strong>Developed through competitive team sports and musical performances.</li>
+          <li><strong>Discipline &amp; Time Management</strong>Balancing a rigorous academic load with multiple extracurricular commitments.</li>
+          <li><strong>Creativity &amp; Performance</strong>Expressed through musical collaboration and school spirit events.</li>
+        </ul>
+      </section>
+ 
+      <section id="extracurricular">
+        <p class="sheet-idx">SEC. 04 — ACTIVITIES</p>
+        <h2>Extracurricular Activities</h2>
+ 
+        <div class="cards">
+          <div class="card music">
+            <span class="tag">MUSIC &amp; CULTURE</span>
+            <h3>Music &amp; School Culture</h3>
+            <ul>
+              <li>Jazz Band member for 3 years, playing alto and baritone saxophone (current). Placed 2nd at the V&amp;A Waterfront High School Band Slam.</li>
+              <li>Spirit Squad Band — motivates fellow students and represents school pride at sporting events.</li>
+              <li>Legally Blonde band — live band member for the school's bi-yearly musical, collaborating with musicians and performers through rehearsals.</li>
+            </ul>
+          </div>
+ 
+          <div class="card academic">
+            <span class="tag">ACADEMIC EXTENSION</span>
+            <h3>Academic Extension</h3>
+            <ul>
+              <li>Cape Town Eskom Expo for Young Scientists — regional round with partner Ewan Connan, bronze medal in Computer Sciences.</li>
+              <li>UCT Maths Competition — annual participant, consistently just short of qualifying for round two.</li>
+              <li>IT Coding Olympiad — 100% in round one of the SA Computer Olympiad, 49% in round two.</li>
+            </ul>
+          </div>
+ 
+          <div class="card sport">
+            <span class="tag">SPORTS</span>
+            <h3>Sports</h3>
+            <ul>
+              <li>Water polo, volleyball and rugby player — active in multiple team sports, building fitness, resilience and team dynamics.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+ 
+  <footer id="contact">
+    <div class="titleblock">
+      <div class="tb-cell">
+        <p class="tb-label mono">NAME</p>
+        <p class="tb-value">Nathan Broster-Masureik</p>
+      </div>
+      <div class="tb-cell">
+        <p class="tb-label mono">CELLPHONE</p>
+        <p class="tb-value"><a href="tel:+27684956333">(+27) 68 495 6333</a></p>
+      </div>
+      <div class="tb-cell">
+        <p class="tb-label mono">SCHOOL PHONE</p>
+        <p class="tb-value"><a href="tel:0215317410">021 531 7410</a></p>
+      </div>
+      <div class="tb-cell">
+        <p class="tb-label mono">EMAIL</p>
+        <p class="tb-value"><a href="mailto:nathan.broster-masureik@phs.org.za">nathan.broster-masureik@phs.org.za</a></p>
+      </div>
+      <div class="tb-cell">
+        <p class="tb-label mono">ADDRESS</p>
+        <p class="tb-value">7 Field Close, Pinelands, 7405</p>
+      </div>
+      <div class="tb-cell">
+        <p class="tb-label mono">LANGUAGES</p>
+        <p class="tb-value">English (Home), Afrikaans (First Additional)</p>
+      </div>
+      <div class="tb-cell">
+        <p class="tb-label mono">SCHOOL</p>
+        <p class="tb-value">Pinelands High School</p>
+      </div>
+      <div class="tb-cell">
+        <p class="tb-label mono">STATUS</p>
+        <p class="tb-value">Grade 11 (current)</p>
+      </div>
     </div>
-    </div>
-  </article>
-</section>
-
-<footer>
-    <h4> Nathan Broster-Masureik Contact Information</h4>
-    <p class="footertext">Address: 7 Field Close, Pinelands, 7405 <br> Cellphone: (+27) 68 495 6333 | School phone: 021 531 7410 <br> Email: nathan.broster-masureik@phs.org.za <br> Languages: English (Home Language), Afrikans (First Additional Language)</p>
-</footer>
-
+    <p class="colophon">DRAWN BY N. BROSTER-MASUREIK · SHEET 1/1 · 2026</p>
+  </footer>
+ 
+</div>
+ 
 </body>
 </html>
-
